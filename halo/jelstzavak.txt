@@ -60,3 +60,31 @@ Router(config)#exit
 Router#
 =elindítja a jelszótitkosítás szolgáltatást (az összes, alapból nem titkosított jelszóra vonatkozik), a jelszavak titkosítva lesznek eltárolva, akkor is működik, ha előbb állítottuk be a jelszavakat és utólag adjuk ki ezt a parancsot
 
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+Router>enable
+Router#configure terminal
+Router(config)#hostname Teszt
+Teszt(config)#ip domain-name example.com
+Teszt(config)#crypto key generate rsa
+(a kérdésre adjunk meg egy méretet, ajánlott legalább 1024)
+Teszt(config)#line vty 0 15
+Teszt(config-line)#transport input ssh
+Teszt(config-line)#exit
+Teszt(config)#exit
+Teszt#
+
+
+
+
+
+
+
+Teszt(config)#ip ssh version 2
+=alapesetben az ssh 1.99-es verzióval indul, 2-es verziójúra átváltani ezzel a paranccsal lehet. ez után már újabb rendszerüzenetet nem fogunk kapni.
+
+Teszt(config)#username Bob privilege 15 secret asd
+Teszt(config)#line vty 0 15
+Teszt(config-line)#login local
+Teszt(config-line)#exit
+Teszt(config)#exit
