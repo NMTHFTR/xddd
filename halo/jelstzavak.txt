@@ -1,0 +1,62 @@
+Router és switch jelszavak
+(a zölddel írt cisco helyére kerül a beállítandó jelszó)
+
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+Router>enable
+Router#configure terminal
+Router(config)#line console 0
+Router(config-line)#password cisco
+Router(config-line)#login
+Router(config-line)#exit
+Router(config)#exit
+Router#
+=konzolhozzáférés jelszavát beállítja, és hogy kérje is a jelszót, ezt a felhasználói mód előtt az Enter megnyomása után fogja kérni, alapból nem titkosított
+
+
+Router>enable
+Router#configure terminal
+Router(config)#service password-encryption
+Router(config)#exit
+Router#
+=elindítja a jelszótitkosítás szolgáltatást (az összes, alapból nem titkosított jelszóra vonatkozik), a jelszavak titkosítva lesznek eltárolva, akkor is működik, ha előbb állítottuk be a jelszavakat és utólag adjuk ki ezt a parancsot
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+!!!!!!
+
+Router>enable
+Router#configure terminal
+Router(config)#enable password cisco 
+Router(config)#exit
+Router#
+=jelszót beállít, az enable után fogja kérni, alapból nem titkosított
+
+!!!!!!!
+
+Router>enable
+Router#configure terminal
+Router(config)#enable secret cisco
+Router(config)#exit
+Router#
+=biztonságosabb jelszót beállít, az enable után fogja kérni, ha secret és password is van, akkor a secret-et kéri
+
+Router> enable
+Router#configure terminal
+Router(config)#line vty 0 4
+Router(config-line)#password cisco
+Router(config-line)#login
+Router(config-line)#exit
+Router(config)#exit
+Router#
+=távoli terminál (telnet vagy ssh) hozzáférések jelszavát beállítja és hogy kérje is a jelszót, távoli kapcsolódáskor fogja kérni, alapból nem titkosított
+
+Router>enable
+Router#configure terminal
+Router(config)#service password-encryption
+Router(config)#exit
+Router#
+=elindítja a jelszótitkosítás szolgáltatást (az összes, alapból nem titkosított jelszóra vonatkozik), a jelszavak titkosítva lesznek eltárolva, akkor is működik, ha előbb állítottuk be a jelszavakat és utólag adjuk ki ezt a parancsot
+

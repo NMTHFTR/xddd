@@ -1,0 +1,69 @@
+Router és switch IP-címei
+(a zölddel írt szövegek példák, oda kerülnek a konkrét dolgok)
+
+A működéshez az interfésznek (legyen akár fizikai, akár virtuális) IP-címet kell adni ÉS aktiválva (no shutdown) kell lennie. Független műveletek, tehát létezhet IP-címmel rendelkező interfész aktiválatlanul, vagy lehet aktivált, de IP-cím nélküli interfész, de helyesen csak együtt működik.
+Packet Tracerben a zöld pötty/zöld háromszög NEM az IP-cím helyességét jelzi! Akkor zöld, ha az interfész aktiválva van (no shutdown), megfelelő kábellel van összekötve valamivel ÉS a másik eszközön is aktiválva van az interfész.
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+Switch>enable
+Switch#configure terminal
+Switch(config)#interface vlan 1
+Switch(config-if)#ip address 192.168.1.1 255.255.255.0
+Switch(config-if)#no shutdown
+Switch(config-if)#exit
+Switch(config)#exit
+Switch#
+= IP-címet beállít a kapcsoló vlan 1 nevű virtuális interfészén (SVI) ÉS aktiválja is az interfészt
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+Switch>enable
+Switch#configure terminal
+Switch(config)#ip default-gateway 192.168.1.1
+Switch(config)#exit
+Switch#
+= alapértelmezett átjárót állít be a kapcsolón
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+
+Router>enable
+Router#configure terminal
+Router(config)#interface fastethernet 0/0
+Router(config-if)#ip address 192.168.1.1 255.255.255.0
+Router(config-if)#no shutdown
+Router(config-if)#exit
+Router(config)#exit
+Router#
+=IP-címet beállít a forgalomirányító fastethernet 0/0 interfészén, majd aktiválja az interfészt
+
+Router>enable
+Router#configure terminal
+Router(config)#interface fastethernet 0/0
+Router(config-if)#ip address dhcp
+Router(config-if)#no shutdown
+Router(config-if)#exit
+Router(config)#exit
+Router#
+=az interfészen dhcp-vel fog a router IP-konfigurációt kérni ezentúl, majd aktiválja az interfészt
+
+
+
+Router>enable
+Router#configure terminal
+Router(config)#interface fastethernet 0/0
+Router(config-if)#no ip address
+Router(config-if)#exit
+Router(config)#exit
+Router#
+=törli az (pl. hibásan beállított) IP-címet a fastethernet 0/0 interfészről (az interfészt nem kell leállítani ehhez shutdown utasítással)
+
+
+Router>enable
+Router#show ip interface brief
+= táblázatban megmutatja a router interfészeinek állapotait
+
